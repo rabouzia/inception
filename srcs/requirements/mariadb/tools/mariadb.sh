@@ -10,6 +10,6 @@ echo "FLUSH PRIVILEGES;" | mysql
 
 echo "CREATE DATABASE $BDD_NAME;" | mysql
 
-kill $(cat /vat/run/mysqld/mysqld.pid)
+kill $(cat /var/run/mysqld/mysqld.pid)
 
 mysqld

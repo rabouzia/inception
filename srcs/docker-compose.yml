@@ -1,2 +1,34 @@
+services:
+  adminer:
+    container_name: Adminer     # Name redirect to IP -> 172.X.X.Z
+    build: requirements/adminer/.  # Build the dockerfile in ./adminer_directory/Dockerfile 
+    restart: always             # Restart the container if it has stopped
+    ports:
+      - "80:80"                 # Redirect port 80 of Adminer on the host
+    networks:
+      - mynetwork               # Use mynetwork for communicate with mariadb
+  
+  mariadb:
+    container_name: Mariadb
+    build: requirements/mariadb/.
+    restart: always
+    networks:
+      - mynetwork
+    volumes:
+      - db:/var/lib/mysql
+    env_file: /Users/ramzerk/.0_dev/inception/.env
 
+# NETWORK
+networks:
+  mynetwork:
+    name : mynetwork
+    driver : bridge         # Remember the different types of Networks, I showed you before ???
 
+# VOLUME
+volumes:
+  db:
+    driver: local
+    driver_opts:            # Options specific to the driver
+      type: 'none'
+      o: 'bind'
+      device: ./my_volume   # Persistent volume
