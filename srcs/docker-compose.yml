@@ -16,7 +16,7 @@ services:
       - mynetwork
     volumes:
       - db:/var/lib/mysql
-    env_file: /Users/ramzerk/.0_dev/inception/.env
+    env_file: /home/rabouzia/.env
 
 # NETWORK
 networks:
