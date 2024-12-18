@@ -1,12 +1,10 @@
 services:
   adminer:
-    container_name: Adminer     # Name redirect to IP -> 172.X.X.Z
-    build: requirements/adminer/.  # Build the dockerfile in ./adminer_directory/Dockerfile 
-    restart: always             # Restart the container if it has stopped
-    ports:
-      - "80:80"                 # Redirect port 80 of Adminer on the host
+    container_name: Adminer
+    build: requirements/adminer/.
+    restart: always
     networks:
-      - mynetwork               # Use mynetwork for communicate with mariadb
+      - mynetwork
   
   mariadb:
     container_name: Mariadb
@@ -16,19 +14,53 @@ services:
       - mynetwork
     volumes:
       - db:/var/lib/mysql
-    env_file: /home/rabouzia/.env
+    env_file: /Users/ramzerk/.env
+  
+  wordpress:
+    container_name: wordpress
+    build: requirements/wordpress
+    depends_on:
+      - mariadb
+    networks:
+      - mynetwork
+    volumes:
+      - wp:/var/www/html
+    env_file: /Users/ramzerk/.env
+    stdin_open: true
+    tty: true
+  
+  nginx:
+    container_name: nginx
+    build: requirements/nginx/.
+    restart: always
+    volumes:
+     - wp:/var/www/html
+    depends_on:
+      - wordpress
+      - adminer
+    ports:
+      - "443:443"
+      - "80:80"
+      - "25565:25565"
+    networks:
+      - mynetwork
 
-# NETWORK
+
 networks:
   mynetwork:
     name : mynetwork
-    driver : bridge         # Remember the different types of Networks, I showed you before ???
+    driver : bridge
 
-# VOLUME
 volumes:
   db:
     driver: local
-    driver_opts:            # Options specific to the driver
+    driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume   # Persistent volume
+      device: ./my_volume
+  wp:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./my_volume
