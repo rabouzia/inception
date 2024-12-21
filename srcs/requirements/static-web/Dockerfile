@@ -13,7 +13,7 @@ RUN openssl req \
             -newkey rsa:2048 \
             -keyout /etc/ssl/private/nginx-selfsigned.key \
             -out /etc/ssl/certs/nginx-selfsigned.crt \
-            -subj '/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=YBELATAR/UID=YB'
+            -subj '/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=rabouzia/UID=YB'
 
 RUN echo "ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;\nssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;" > /etc/nginx/snippets/self-signed.conf
 RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048

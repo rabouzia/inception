@@ -3,8 +3,12 @@ services:
     container_name: Adminer
     build: requirements/adminer/.
     restart: always
+    volumes:
+      - adm:/usr/share/adminer
     networks:
       - mynetwork
+    expose:
+      - "9000"
   
   mariadb:
     container_name: Mariadb
@@ -14,7 +18,9 @@ services:
       - mynetwork
     volumes:
       - db:/var/lib/mysql
-    env_file: /Users/ramzerk/.env
+    expose:
+      - "3306"
+    env_file: /home/rabouzia/.env
   
   wordpress:
     container_name: wordpress
@@ -25,7 +31,9 @@ services:
       - mynetwork
     volumes:
       - wp:/var/www/html
-    env_file: /Users/ramzerk/.env
+    expose:
+      - "9000"
+    env_file: /home/rabouzia/.env
     stdin_open: true
     tty: true
   
@@ -35,6 +43,7 @@ services:
     restart: always
     volumes:
      - wp:/var/www/html
+     - adm:/var/www/adminer
     depends_on:
       - wordpress
       - adminer
@@ -57,10 +66,16 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume
+      device: ./my_volume/mariadb
   wp:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume
+      device: ./my_volume/wordpress
+  adm:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./my_volume/adminer

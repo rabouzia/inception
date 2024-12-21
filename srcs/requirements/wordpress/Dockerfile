@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt-get update && apt install php \ 
 	wget redis php-redis php-mysqli \
-	php-fpm php-cgi php-curl php-gd \
+	php-fpm php-cgi php-curl curl php-gd \
 	php-mbstring php-xml php-xmlrpc php-soap \
 	php-intl php-zip -y 
 
@@ -18,6 +18,4 @@ COPY conf/wordpress.sh /
 
 RUN chmod +x /wordpress.sh
 
-EXPOSE  9000
-
-ENTRYPOINT [ "/wordpress.sh" ]
+ENTRYPOINT [ "/wordpress.sh", "php-fpm7.4", "-F" ]

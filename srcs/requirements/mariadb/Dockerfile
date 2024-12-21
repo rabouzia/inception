@@ -8,5 +8,5 @@ COPY tools/mariadb.sh /
 
 # RUN chmod +x tools/mariadb.sh
 
+# ENTRYPOINT [ "tail", "-f" ]
 ENTRYPOINT [ "/mariadb.sh", "mysqld" ]
-# ENTRYPOINT [ "/mariadb.sh", "tail", "-f" ]
