@@ -13,4 +13,4 @@ echo "CREATE DATABASE $BDD_NAME;" | mysql
 
 kill $(cat /var/run/mysqld/mysqld.pid)
 
-exec $@
+xexec $@
