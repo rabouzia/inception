@@ -4,6 +4,7 @@ RUN apt-get update && \
     apt install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /etc/nginx/ssl
 
 # SETUP TLS CERTIFICATE
 RUN openssl req \

@@ -20,7 +20,7 @@ services:
       - db:/var/lib/mysql
     expose:
       - "3306"
-    env_file: /home/rabouzia/.env
+    env_file: /Users/ramzerk/.env
   
   wordpress:
     container_name: wordpress
@@ -33,7 +33,7 @@ services:
       - wp:/var/www/html
     expose:
       - "9000"
-    env_file: /home/rabouzia/.env
+    env_file: /Users/ramzerk/.env
     stdin_open: true
     tty: true
   

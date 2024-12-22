@@ -1,21 +1,11 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt install php \ 
-	wget redis php-redis php-mysqli \
-	php-fpm php-cgi php-curl curl php-gd \
-	php-mbstring php-xml php-xmlrpc php-soap \
-	php-intl php-zip -y 
+RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get update && \
-    apt install default-mysql-client -y
+RUN apt-get install -y curl php php7.4-fpm php-mysql mariadb-client wget vim zsh git netcat mycli
 
-RUN mkdir /run/php
+COPY /conf/wordpress.sh /
 
+RUN  chmod +x wordpress.sh
 
-COPY page/www.conf /etc/php/7.4/fpm/pool.d/
-
-COPY conf/wordpress.sh /
-
-RUN chmod +x /wordpress.sh
-
-ENTRYPOINT [ "/wordpress.sh", "php-fpm7.4", "-F" ]
+ENTRYPOINT ["./wordpress.sh"]
