@@ -12,6 +12,11 @@ stop:
 delete:
 	sudo rm -rf srcs/my_volume/wordpress
 	sudo rm -rf srcs/my_volume/mariadb
+supp:
+	docker volume rm srcs_db
+	docker volume rm srcs_wp
+	docker volume rm srcs_adm
+
 
 logs:
 	docker compose --project-directory srcs logs

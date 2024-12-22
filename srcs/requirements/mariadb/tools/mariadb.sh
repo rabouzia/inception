@@ -1,7 +1,8 @@
 #!/bin/sh
 
-service mariadb start
 
+service mariadb start
+ 
 echo "FLUSH PRIVILEGES;" | mysql
 echo "CREATE USER '$BDD_USER'@'%' IDENTIFIED BY '$BDD_USER_PASSWORD';" | mysql
 

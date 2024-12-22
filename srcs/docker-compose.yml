@@ -1,4 +1,14 @@
 services:
+  mariadb:
+    container_name: Mariadb
+    build: requirements/mariadb
+    restart: always
+    networks:
+      - mynetwork
+    volumes:
+      - db:/var/lib/mysql
+    env_file: /home/rabouzia/.env
+
   adminer:
     container_name: Adminer
     build: requirements/adminer/.
@@ -9,19 +19,7 @@ services:
       - mynetwork
     expose:
       - "9000"
-  
-  mariadb:
-    container_name: Mariadb
-    build: requirements/mariadb/.
-    restart: always
-    networks:
-      - mynetwork
-    volumes:
-      - db:/var/lib/mysql
-    expose:
-      - "3306"
-    env_file: /Users/ramzerk/.env
-  
+    
   wordpress:
     container_name: wordpress
     build: requirements/wordpress
@@ -33,7 +31,7 @@ services:
       - wp:/var/www/html
     expose:
       - "9000"
-    env_file: /Users/ramzerk/.env
+    env_file: /home/rabouzia/.env
     stdin_open: true
     tty: true
   
