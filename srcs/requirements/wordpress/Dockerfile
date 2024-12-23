@@ -8,4 +8,4 @@ COPY /conf/wordpress.sh /
 
 RUN  chmod +x wordpress.sh
 
-ENTRYPOINT ["./wordpress.sh"]
+ENTRYPOINT ["./wordpress.sh", "php-fpm7.4", "-F"]

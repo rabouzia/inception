@@ -65,12 +65,14 @@ volumes:
       type: 'none'
       o: 'bind'
       device: ./my_volume/mariadb
+
   wp:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: ./my_volume/wordpress
+  
   adm:
     driver: local
     driver_opts:

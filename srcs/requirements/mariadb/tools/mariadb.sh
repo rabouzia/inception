@@ -3,6 +3,8 @@
 
 service mariadb start
  
+sleep 5
+
 echo "FLUSH PRIVILEGES;" | mysql
 echo "CREATE USER '$BDD_USER'@'%' IDENTIFIED BY '$BDD_USER_PASSWORD';" | mysql
 
