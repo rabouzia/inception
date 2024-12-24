@@ -11,7 +11,7 @@ services:
     env_file: /home/rabouzia/.env
 
   adminer:
-    container_name: Adminer
+    container_name: adminer
     build: requirements/bonus/adminer
     restart: always
     networks:
