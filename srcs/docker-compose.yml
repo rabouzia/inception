@@ -1,22 +1,21 @@
 services:
+  
   mariadb:
     container_name: Mariadb
     build: requirements/mariadb
     restart: always
     networks:
-      - mynetwork
+      - inception
     volumes:
       - db:/var/lib/mysql
     env_file: /home/rabouzia/.env
 
   adminer:
     container_name: Adminer
-    build: requirements/adminer/.
+    build: requirements/bonus/adminer
     restart: always
-    volumes:
-      - adm:/usr/share/adminer
     networks:
-      - mynetwork
+      - inception
     expose:
       - "9000"
     
@@ -26,7 +25,7 @@ services:
     depends_on:
       - mariadb
     networks:
-      - mynetwork
+      - inception
     volumes:
       - wp:/var/www/html
     expose:
@@ -50,12 +49,51 @@ services:
       - "80:80"
       - "25565:25565"
     networks:
-      - mynetwork
+      - inception
 
+  redis:
+    container_name: redis
+    build: requirements/bonus/redis
+    restart: always
+    networks:
+      - inception
+    env_file: /home/rabouzia/.env
+  
+  ftp:
+    container_name: ftp
+    build: requirements/bonus/ftp
+    restart: always
+    networks:
+      - inception
+    ports:
+      - "20:20"
+      - "21:21"
+      - "40000-40050:40000-40050"
+    env_file: /home/rabouzia/.env
+
+  portfolio:
+    container_name: portfolio
+    build: requirements/bonus/portfolio
+    restart: always
+    networks:
+      - inception
+    ports:
+      - "3000:3000"
+
+  minecraft:
+    container_name: minecraft
+    build: requirements/bonus/minecraft
+    restart: always
+    networks:
+      - inception
+    ports:
+      - "25565:25565"
+    volumes:
+      - mc:./my_volume/minecraft
 
 networks:
-  mynetwork:
-    name : mynetwork
+  inception:
+    name : inception
     driver : bridge
 
 volumes:
@@ -72,6 +110,13 @@ volumes:
       type: 'none'
       o: 'bind'
       device: ./my_volume/wordpress
+  
+  mc:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ./my_volume/minecraft
   
   adm:
     driver: local
