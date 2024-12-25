@@ -1,7 +1,50 @@
+
+############################## VOLUMES #########################################
+
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: ~/Users/ramzerk/data/mariadb
+
+
+  wp:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /Users/ramzerk/data/wordpress
+
+
+  mc:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /Users/ramzerk/data/minecraft
+
+
+  adm:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /Users/ramzerk/data/adminer
+
+
+
+############################## MANDATORY #########################################
+
+
+##############################  SERVICE #########################################
+
 services:
-  
+
   mariadb:
-    container_name: Mariadb
+    container_name: mariadb
     build: requirements/mariadb
     restart: always
     networks:
@@ -9,6 +52,8 @@ services:
     volumes:
       - db:/var/lib/mysql
     env_file: .env
+
+
 
   adminer:
     container_name: adminer
@@ -18,7 +63,9 @@ services:
       - inception
     expose:
       - "9000"
-    
+
+
+
   wordpress:
     container_name: wordpress
     build: requirements/wordpress
@@ -33,7 +80,9 @@ services:
     env_file: .env
     stdin_open: true
     tty: true
-  
+
+
+
   nginx:
     container_name: nginx
     build: requirements/nginx/.
@@ -51,6 +100,9 @@ services:
     networks:
       - inception
 
+############################## BONUS #########################################
+
+
   redis:
     container_name: redis
     build: requirements/bonus/redis
@@ -58,7 +110,9 @@ services:
     networks:
       - inception
     env_file: .env
-  
+
+
+
   ftp:
     container_name: ftp
     build: requirements/bonus/ftp
@@ -71,14 +125,18 @@ services:
       - "40000-40050:40000-40050"
     env_file: .env
 
-  portfolio:
-    container_name: portfolio
-    build: requirements/bonus/portfolio
+
+
+  static_web:
+    container_name: static_web
+    build: requirements/bonus/static_web
     restart: always
     networks:
       - inception
     ports:
       - "3000:3000"
+
+
 
   minecraft:
     container_name: minecraft
@@ -91,36 +149,10 @@ services:
     volumes:
       - mc:/Users/ramzerk/data/minecraft
 
+
+############################## NETWORK #########################################
+
 networks:
   inception:
     name : inception
     driver : bridge
-
-volumes:
-  db:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: /Users/ramzerk/data/mariadb
-
-  wp:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: /Users/ramzerk/data/wordpress
-  
-  mc:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: /Users/ramzerk/data/minecraft
-  
-  adm:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: /Users/ramzerk/data/adminer

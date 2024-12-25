@@ -48,12 +48,3 @@ server {
           #      fastcgi_param PATH_INFO $fastcgi_path_info;
         }
 }
-		}
-
-	# changer les /www/html/wp en /www/wordpress
-
-server 
-{
-	server_name my_portfolio
-
-}
