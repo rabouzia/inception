@@ -8,7 +8,7 @@ services:
       - inception
     volumes:
       - db:/var/lib/mysql
-    env_file: /home/rabouzia/.env
+    env_file: .env
 
   adminer:
     container_name: adminer
@@ -30,7 +30,7 @@ services:
       - wp:/var/www/html
     expose:
       - "9000"
-    env_file: /home/rabouzia/.env
+    env_file: .env
     stdin_open: true
     tty: true
   
@@ -57,7 +57,7 @@ services:
     restart: always
     networks:
       - inception
-    env_file: /home/rabouzia/.env
+    env_file: .env
   
   ftp:
     container_name: ftp
@@ -69,7 +69,7 @@ services:
       - "20:20"
       - "21:21"
       - "40000-40050:40000-40050"
-    env_file: /home/rabouzia/.env
+    env_file: .env
 
   portfolio:
     container_name: portfolio
@@ -89,7 +89,7 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - mc:./my_volume/minecraft
+      - mc:/Users/ramzerk/data/minecraft
 
 networks:
   inception:
@@ -102,25 +102,25 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume/mariadb
+      device: /Users/ramzerk/data/mariadb
 
   wp:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume/wordpress
+      device: /Users/ramzerk/data/wordpress
   
   mc:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume/minecraft
+      device: /Users/ramzerk/data/minecraft
   
   adm:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ./my_volume/adminer
+      device: /Users/ramzerk/data/adminer
