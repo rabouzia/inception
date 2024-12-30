@@ -8,7 +8,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: ~/Users/ramzerk/data/mariadb
+      device: /Users/ramzerk/data/mariadb
 
 
   wp:
@@ -61,9 +61,11 @@ services:
     restart: always
     networks:
       - inception
-    expose:
-      - "9000"
-
+    depends_on:
+      - nginx
+    env_file: .env
+    ports:
+      - "80:80" 
 
 
   wordpress:
@@ -89,16 +91,13 @@ services:
     restart: always
     volumes:
      - wp:/var/www/html
-     - adm:/var/www/adminer
     depends_on:
       - wordpress
-      - adminer
     ports:
       - "443:443"
-      - "80:80"
-      - "25565:25565"
     networks:
       - inception
+
 
 ############################## BONUS #########################################
 
@@ -113,28 +112,28 @@ services:
 
 
 
-  ftp:
-    container_name: ftp
-    build: requirements/bonus/ftp
-    restart: always
-    networks:
-      - inception
-    ports:
-      - "20:20"
-      - "21:21"
-      - "40000-40050:40000-40050"
-    env_file: .env
+  # ftp:
+  #   container_name: ftp
+  #   build: requirements/bonus/ftp
+  #   restart: always
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "40000-40050:40000-40050"
+  #   env_file: .env
 
 
 
-  static_web:
-    container_name: static_web
-    build: requirements/bonus/static_web
-    restart: always
-    networks:
-      - inception
-    ports:
-      - "3000:3000"
+  # static_web:
+  #   container_name: static_web
+  #   build: requirements/bonus/static_web
+  #   restart: always
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "3000:3000"
 
 
 
@@ -148,6 +147,7 @@ services:
       - "25565:25565"
     volumes:
       - mc:/Users/ramzerk/data/minecraft
+
 
 
 ############################## NETWORK #########################################
