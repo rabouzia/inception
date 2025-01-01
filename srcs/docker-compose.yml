@@ -112,28 +112,28 @@ services:
 
 
 
-  # ftp:
-  #   container_name: ftp
-  #   build: requirements/bonus/ftp
-  #   restart: always
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "20:20"
-  #     - "21:21"
-  #     - "40000-40050:40000-40050"
-  #   env_file: .env
+  ftp:
+    container_name: ftp
+    build: requirements/bonus/ftp
+    restart: always
+    networks:
+      - inception
+    ports:
+      - "20:20"
+      - "21:21"
+      - "40000-40050:40000-40050"
+    env_file: .env
 
 
 
-  # static_web:
-  #   container_name: static_web
-  #   build: requirements/bonus/static_web
-  #   restart: always
-  #   networks:
-  #     - inception
-  #   ports:
-  #     - "3000:3000"
+  static_web:
+    container_name: static_web
+    build: requirements/bonus/static_web
+    restart: always
+    networks:
+      - inception
+    ports:
+      - "3000:3000"
 
 
 

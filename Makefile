@@ -17,15 +17,15 @@ supp:
 	docker container rm -f mariadb
 	docker container rm -f wordpress
 	docker container rm -f nginx
-	# docker container rm -f ftp
-	# docker container rm -f redis
+	docker container rm -f ftp
+	docker container rm -f redis
 	docker container rm -f minecraft
-	# docker container rm -f adminer
-	# docker container rm -f static_web
-	# docker volume rm srcs_db
-	# docker volume rm srcs_wp
-	# docker volume rm srcs_adm
-	# docker volume rm srcs_mc
+	docker container rm -f adminer
+	docker container rm -f static_web
+	docker volume rm srcs_db
+	docker volume rm srcs_wp
+	docker volume rm srcs_adm
+	docker volume rm srcs_mc
 	docker system prune -af
 
 

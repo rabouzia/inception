@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt-get update && \
     apt-get -y upgrade && \
-    apt-get install -y vsftpd
+    apt-get install -y vsftpd vim zsh
 
 COPY conf/vfsdt.conf /etc/
 

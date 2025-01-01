@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt update && \
     apt upgrade -y && \
-    apt-get install -y python3
+    apt-get install -y python3 vim zsh
 
 RUN mkdir website
 

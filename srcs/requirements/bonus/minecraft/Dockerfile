@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt-get update -y && \
     apt-get upgrade -y  && \
-    apt-get install -y iproute2 vim curl jq ca-certificates apt-transport-https gnupg wget && \
+    apt-get install -y iproute2 vim curl jq ca-certificates apt-transport-https gnupg wget vim zsh && \
     rm -rf /var/lib/apt/lists/*
 
 
