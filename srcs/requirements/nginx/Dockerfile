@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update && \
-    apt install -y nginx openssl && \
+    apt-get install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/nginx/ssl
@@ -15,12 +15,8 @@ RUN openssl dhparam -out /etc/nginx/dhparam.pem 2048
 COPY conf/ssl_cert.conf /etc/nginx/snippets/
 
 COPY conf/nginx.conf    /etc/nginx/nginx.conf
-# COPY /Users/ramzerk/in/srcs/requirements/bonus/adminer/conf/000-default.conf /etc/nginx/sites-available
 COPY conf/index.html    /var/www/html/wordpress/index.html
 
 RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
-# RUN  ln -s /etc/nginx/sitesx-available/adminer.conf /etc/nginx/sites-enabled/
-
-
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]

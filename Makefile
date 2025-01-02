@@ -1,17 +1,17 @@
 all: start
 
 start:
-	mkdir -p ~/Users/ramzerk/data/mariadb
-	mkdir -p ~/Users/ramzerk/data/wordpress
-	mkdir -p ~/Users/ramzerk/data/adminer
-	mkdir -p ~/Users/ramzerk/data/minecraft
+	mkdir -p ~/home/rabouzia/data/mariadb
+	mkdir -p ~/home/rabouzia/data/wordpress
+	mkdir -p ~/home/rabouzia/data/adminer
+	mkdir -p ~/home/rabouzia/data/minecraft
 	docker compose --project-directory srcs up --build -d
 
 stop:
 	docker compose --project-directory srcs down
 
 delete:
-	 sudo rm -rf ~/Users/ramzerk/data/*
+	 sudo rm -rf ~/home/rabouzia/data/*
 
 supp:
 	docker container rm -f mariadb

@@ -12,7 +12,6 @@ RUN wget -O - https://apt.corretto.aws/corretto.key | gpg --dearmor -o /usr/shar
 RUN apt-get update && \
     apt-get install -y java-21-amazon-corretto-jdk
 
-RUN useradd -m rabouzia
 
 RUN mkdir -p /minecraft
 
@@ -22,10 +21,8 @@ COPY conf/eula.txt /minecraft/
 COPY conf/server.properties /minecraft/
 COPY tools/minecraft.sh /minecraft/
 
-RUN wget https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar -O /minecraft/server.jar && \
-    chown -R rabouzia /minecraft
+RUN wget https://piston-data.mojang.com/v1/objects/8dd1a28015f51b1803213892b50b7b4fc76e594d/server.jar -O /minecraft/server.jar 
 
-USER rabouzia
 RUN chmod +x /minecraft/minecraft.sh
 
 ENTRYPOINT [ "/minecraft/minecraft.sh" ]

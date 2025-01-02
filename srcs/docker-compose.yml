@@ -8,7 +8,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/ramzerk/data/mariadb
+      device: /home/rabouzia/data/mariadb
 
 
   wp:
@@ -16,7 +16,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/ramzerk/data/wordpress
+      device: /home/rabouzia/data/wordpress
 
 
   mc:
@@ -24,7 +24,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/ramzerk/data/minecraft
+      device: /home/rabouzia/data/minecraft
 
 
   adm:
@@ -32,7 +32,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: /Users/ramzerk/data/adminer
+      device: /home/rabouzia/data/adminer
 
 
 
@@ -112,17 +112,17 @@ services:
 
 
 
-  ftp:
-    container_name: ftp
-    build: requirements/bonus/ftp
-    restart: always
-    networks:
-      - inception
-    ports:
-      - "20:20"
-      - "21:21"
-      - "40000-40050:40000-40050"
-    env_file: .env
+  # ftp:
+  #   container_name: ftp
+  #   build: requirements/bonus/ftp
+  #   restart: always
+  #   networks:
+  #     - inception
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "40000-40050:40000-40050"
+  #   env_file: .env
 
 
 
@@ -146,7 +146,7 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - mc:/Users/ramzerk/data/minecraft
+      - mc:/home/rabouzia/data/minecraft
 
 
 
